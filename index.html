@@ -1,73 +1,302 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>System Update</title>
-    <meta charset="UTF-8">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
-            margin-top: 120px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doreen 💗</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 24px;
+    }
 
-        h1 {
-            color: #b30059;
-            font-size: 40px;
-        }
+    .card{
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(6px);
+      border-radius: 18px;
+      padding: 28px 22px;
+      max-width: 720px;
+      width: 100%;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+    }
 
-        p {
-            font-size: 20px;
-        }
+    .top {
+      font-size: 18px;
+      letter-spacing: 0.5px;
+      color: #7a003c;
+      margin-bottom: 6px;
+    }
 
-        button {
-            padding: 15px 35px;
-            font-size: 20px;
-            background-color: #ff3366;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            margin-top: 30px;
-        }
+    h1 {
+      color: #b30059;
+      font-size: 40px;
+      margin: 10px 0 8px;
+    }
 
-        button:hover {
-            background-color: #cc0052;
-        }
+    .subtitle{
+      font-size: 18px;
+      color: #4b0030;
+      margin: 0 0 18px;
+      line-height: 1.5;
+    }
 
-        #response {
-            margin-top: 40px;
-            font-size: 26px;
-            color: #660033;
-            display: none;
-        }
-    </style>
+    .stats {
+      display: inline-block;
+      text-align: left;
+      font-size: 16px;
+      background: rgba(255,255,255,0.75);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin: 10px 0 18px;
+      color: #3a0023;
+    }
+
+    .countdown {
+      font-size: 18px;
+      margin: 12px 0 18px;
+      color: #5a0036;
+      font-weight: bold;
+    }
+
+    .btns {
+      position: relative;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 14px 26px;
+      font-size: 18px;
+      background-color: #ff3366;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.08s ease;
+      user-select: none;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    #noBtn{
+      background-color: #7a003c;
+      position: relative;
+    }
+
+    #response {
+      margin-top: 18px;
+      font-size: 22px;
+      color: #3a0023;
+      display: none;
+      line-height: 1.5;
+    }
+
+    #hint {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #5a0036;
+      opacity: 0.9;
+    }
+
+    canvas#confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .small {
+      font-size: 13px;
+      opacity: 0.85;
+      margin-top: 10px;
+      color: #5a0036;
+    }
+  </style>
 </head>
 
 <body>
+  <canvas id="confetti"></canvas>
 
-    <h1>System Check Complete 💻❤️</h1>
+  <!-- Optional music: upload an MP3 into this same repo named "song.mp3" -->
+  <audio id="bgMusic" src="song.mp3" preload="auto"></audio>
 
-    <p>Compatibility: 100%</p>
-    <p>Connection: Stable</p>
-    <p>Heart Status: Fully Synced</p>
+  <div class="card">
+    <div class="top">Hello Doreen 💗</div>
 
-    <h2>Final Prompt:</h2>
-    <h1>Will you be my Valentine?</h1>
+    <h1>System Check Complete</h1>
+    <p class="subtitle">
+      I wanted to ask you in a way that feels like me.<br/>
+      Not complicated. Just intentional.
+    </p>
 
-    <button onclick="showLove()">YES 💘</button>
-
-    <div id="response">
-        Best decision ever 😌❤️  
-        <br><br>
-        See you on February 14th.
+    <div class="stats">
+      ✅ Compatibility: 100%<br/>
+      ✅ Connection: Stable<br/>
+      ✅ Heart Status: Fully Synced<br/>
+      ✅ Priority: You
     </div>
 
-    <script>
-        function showLove() {
-            document.getElementById("response").style.display = "block";
-        }
-    </script>
+    <div class="countdown" id="countdown">Counting down...</div>
 
+    <h1 style="font-size: 34px; margin-top: 6px;">Doreen, will you be my Valentine?</h1>
+
+    <div class="btns">
+      <button id="yesBtn">YES 💘</button>
+      <button id="noBtn">NO 😅</button>
+    </div>
+
+    <div id="response">
+      Best decision ever 😌❤️<br/>
+      I’m taking you out, and we’re doing this properly.<br/><br/>
+      <span class="small">Redirecting to your surprise…</span>
+    </div>
+
+    <div id="hint">Tip: sound turns on after you click “YES” (phone-friendly).</div>
+  </div>
+
+  <script>
+    // --- Countdown to the next Feb 14 (local time) ---
+    function nextFeb14() {
+      const now = new Date();
+      const year = now.getFullYear();
+      let target = new Date(year, 1, 14, 0, 0, 0); // Feb = 1
+      if (now > target) target = new Date(year + 1, 1, 14, 0, 0, 0);
+      return target;
+    }
+
+    const targetDate = nextFeb14();
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown(){
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownEl.textContent = "It’s Valentine’s Day 💗";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+
+      countdownEl.textContent = `Countdown to Feb 14: ${days}d ${hours}h ${mins}m ${secs}s`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // --- "NO" button runs away ---
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    function moveNoButton(){
+      const maxX = 160; // how far it can jump
+      const maxY = 40;
+      const x = (Math.random() * 2 - 1) * maxX;
+      const y = (Math.random() * 2 - 1) * maxY;
+
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    // Works for mouse + mobile
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoButton(); }, {passive:false});
+
+    // --- Confetti (simple canvas confetti, no libraries) ---
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let W, H;
+    function resize(){
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    let pieces = [];
+    function makeConfetti(n=180){
+      pieces = [];
+      for(let i=0;i<n;i++){
+        pieces.push({
+          x: Math.random()*W,
+          y: -20 - Math.random()*H*0.3,
+          r: 4 + Math.random()*6,
+          vy: 2 + Math.random()*5,
+          vx: -2 + Math.random()*4,
+          rot: Math.random()*Math.PI,
+          vr: -0.2 + Math.random()*0.4
+        });
+      }
+    }
+
+    function drawConfetti(){
+      ctx.clearRect(0,0,W,H);
+      for(const p of pieces){
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillRect(-p.r, -p.r, p.r*2, p.r*2);
+        ctx.restore();
+
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+
+        if (p.y > H + 40) p.y = -20;
+        if (p.x > W + 40) p.x = -20;
+        if (p.x < -40) p.x = W + 20;
+      }
+    }
+
+    let confettiOn = false;
+    function animate(){
+      if(confettiOn){
+        // randomize color each frame a bit (keeps it lively without hard-coding a palette)
+        ctx.fillStyle = `hsl(${Math.floor(Math.random()*360)}, 90%, 60%)`;
+        drawConfetti();
+      } else {
+        ctx.clearRect(0,0,W,H);
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // --- YES action: show message, play music, confetti, then redirect ---
+    const response = document.getElementById("response");
+    const music = document.getElementById("bgMusic");
+
+    yesBtn.addEventListener("click", async () => {
+      response.style.display = "block";
+      confettiOn = true;
+      makeConfetti(220);
+
+      // Music: upload song.mp3 into the repo root for this to work
+      try { await music.play(); } catch(e) { /* ignore if no file or blocked */ }
+
+      // Redirect after 5 seconds (you can change the URL)
+      setTimeout(() => {
+        // Option 1: redirect to another page you create, e.g., "surprise.html"
+        // window.location.href = "surprise.html";
+
+        // Option 2: stay on same page (comment out the line below if you don’t want redirect)
+        window.location.href = "https://calendar.google.com/calendar/u/0/r"; 
+      }, 5000);
+    });
+
+    // If you want the redirect to go to a custom page, create "surprise.html" and uncomment the line above.
+  </script>
 </body>
 </html>
