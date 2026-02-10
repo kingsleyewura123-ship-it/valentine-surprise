@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Update</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            margin-top: 120px;
+        }
+
+        h1 {
+            color: #b30059;
+            font-size: 40px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 20px;
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        button:hover {
+            background-color: #cc0052;
+        }
+
+        #response {
+            margin-top: 40px;
+            font-size: 26px;
+            color: #660033;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>System Check Complete 💻❤️</h1>
+
+    <p>Compatibility: 100%</p>
+    <p>Connection: Stable</p>
+    <p>Heart Status: Fully Synced</p>
+
+    <h2>Final Prompt:</h2>
+    <h1>Will you be my Valentine?</h1>
+
+    <button onclick="showLove()">YES 💘</button>
+
+    <div id="response">
+        Best decision ever 😌❤️  
+        <br><br>
+        See you on February 14th.
+    </div>
+
+    <script>
+        function showLove() {
+            document.getElementById("response").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
