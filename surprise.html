@@ -1,70 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Doreen ❤️</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doreen ❤️</title>
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #ff9a9e, #fad0c4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-}
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      padding:24px;
+    }
 
-.card {
-    background: rgba(255,255,255,0.85);
-    padding: 30px;
-    border-radius: 20px;
-    max-width: 500px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-}
+    .card{
+      position:relative;
+      background: rgba(255,255,255,0.85);
+      border-radius: 20px;
+      padding: 28px 22px;
+      max-width: 560px;
+      width:100%;
+      text-align:center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      backdrop-filter: blur(6px);
+      animation: popIn 650ms ease-out;
+    }
 
-h1 {
-    color: #b30059;
-}
+    @keyframes popIn{
+      from { transform: translateY(10px); opacity: 0; }
+      to   { transform: translateY(0);  opacity: 1; }
+    }
 
-p {
-    font-size: 18px;
-    color: #4a0030;
-    line-height: 1.6;
-}
+    h1{
+      margin: 6px 0 10px;
+      color:#b30059;
+      font-size: 34px;
+    }
 
-img {
-    width: 100%;
-    max-width: 350px;
-    border-radius: 15px;
-    margin: 20px 0;
-}
-</style>
+    p{
+      margin: 10px 0;
+      font-size: 17px;
+      color:#4a0030;
+      line-height: 1.6;
+    }
+
+    .typed{
+      font-size: 22px;
+      font-weight: bold;
+      color:#7a003c;
+      margin: 14px 0 6px;
+      min-height: 30px;
+    }
+
+    .photo{
+      width:100%;
+      max-width: 360px;
+      border-radius: 16px;
+      margin: 18px auto 6px;
+      display:block;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 1400ms ease-out 450ms forwards;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    @keyframes fadeIn{
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn{
+      margin-top: 16px;
+      padding: 14px 22px;
+      font-size: 18px;
+      background: #ff3366;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.08s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0); }
+
+    .confirmBox{
+      display:none;
+      margin-top: 14px;
+      padding: 14px 14px;
+      background: rgba(255,255,255,0.75);
+      border-radius: 14px;
+      color:#3a0023;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .links{
+      margin-top: 10px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .linkBtn{
+      display:inline-block;
+      text-decoration:none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(122,0,60,0.25);
+      color:#7a003c;
+      background: rgba(255,255,255,0.75);
+      font-size: 14px;
+    }
+
+    /* Floating hearts */
+    .heart{
+      position: fixed;
+      bottom: -40px;
+      width: 18px;
+      height: 18px;
+      transform: rotate(45deg);
+      opacity: 0.85;
+      animation: floatUp linear forwards;
+      pointer-events:none;
+      z-index: 0;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
+    }
+    .heart:before, .heart:after{
+      content:"";
+      position:absolute;
+      width:18px;
+      height:18px;
+      border-radius: 50%;
+      top: -9px;
+      left: 0;
+      background: inherit;
+    }
+    .heart:after{
+      left: -9px;
+      top: 0;
+    }
+    @keyframes floatUp{
+      from { transform: translateY(0) rotate(45deg); }
+      to   { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+    }
+
+    .small{
+      font-size: 13px;
+      opacity: 0.85;
+    }
+  </style>
 </head>
 
 <body>
-
-<div class="card">
+  <div class="card">
     <h1>Doreen ❤️</h1>
 
     <p>
-        I didn’t just want to ask you.<br>
-        I wanted to do it in a way that feels intentional.<br><br>
-        You make my days lighter,<br>
-        my mind calmer,<br>
-        and my heart fuller.<br><br>
-        I’m really looking forward to February 14th with you.
+      I didn’t just want to ask you… I wanted to make it feel intentional.
+      You make my days lighter, my mind calmer, and my heart fuller.
     </p>
 
-    <img src="doreen.jpg" alt="Our photo">
+    <div class="typed" id="typed"></div>
 
-    <p>
-        So officially…<br><br>
-        I’m taking you out, Valentine 😌💘
+    <img class="photo" src="doreen.jpg" alt="Our photo" />
+
+    <p class="small">
+      I’m really looking forward to Valentine’s Day with you.
     </p>
-</div>
 
+    <button class="btn" id="confirmBtn">Confirm Date ✅</button>
+
+    <div class="confirmBox" id="confirmBox">
+      <strong>Confirmed.</strong> I’m taking you out, Valentine 😌💘<br/>
+      I’ll share the details, but just know: you’re the plan.
+      <div class="links">
+        <a class="linkBtn" id="addCal" target="_blank" rel="noopener">Add to Calendar</a>
+        <a class="linkBtn" href="./index.html">Back</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Typewriter: "I love you, Doreen."
+    const text = "I love you, Doreen. 💗";
+    const typedEl = document.getElementById("typed");
+    let i = 0;
+
+    function typeIt(){
+      if(i <= text.length){
+        typedEl.textContent = text.slice(0, i);
+        i++;
+        setTimeout(typeIt, 70);
+      }
+    }
+    setTimeout(typeIt, 450);
+
+    // Floating hearts generator
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+
+      const size = 12 + Math.random() * 14;
+      h.style.width = size + "px";
+      h.style.height = size + "px";
+
+      // random color via HSL (keeps it soft without a rigid palette)
+      h.style.background = `hsl(${Math.floor(Math.random()*20)+340}, 85%, 65%)`;
+
+      const left = Math.random() * 100;
+      h.style.left = left + "vw";
+
+      const duration = 4 + Math.random() * 3.5;
+      h.style.animationDuration = duration + "s";
+
+      document.body.appendChild(h);
+
+      setTimeout(() => h.remove(), duration * 1000);
+    }
+    setInterval(spawnHeart, 420);
+
+    // Confirm button reveals message + sets Calendar link
+    const confirmBtn = document.getElementById("confirmBtn");
+    const confirmBox = document.getElementById("confirmBox");
+    const addCal = document.getElementById("addCal");
+
+    // Optional: prefill Google Calendar event (you can edit the details after it opens)
+    // Times are placeholders: Feb 14, 7–9pm. Adjust if you want.
+    const now = new Date();
+    const year = now.getFullYear();
+    const nextFeb14 = (now > new Date(year,1,14)) ? year + 1 : year;
+
+    // Google Calendar wants UTC-ish format: YYYYMMDDTHHMMSSZ
+    // We’ll keep it simple with "floating" times by omitting Z conversion.
+    const start = `${nextFeb14}0214T190000`;
+    const end   = `${nextFeb14}0214T210000`;
+
+    const calUrl =
+      "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+      "&text=" + encodeURIComponent("Valentine’s Date with Doreen 💗") +
+      "&dates=" + encodeURIComponent(start + "/" + end) +
+      "&details=" + encodeURIComponent("You + Me. Dinner and something sweet. ❤️") +
+      "&location=" + encodeURIComponent("TBD");
+
+    addCal.href = calUrl;
+
+    confirmBtn.addEventListener("click", () => {
+      confirmBox.style.display = "block";
+      confirmBtn.style.display = "none";
+    });
+  </script>
 </body>
 </html>
